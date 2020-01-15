@@ -20,12 +20,10 @@
 # 3. This notice may not be removed or altered from any source distribution.
 # ------------------------------------------------------------------------------
 cmake_minimum_required(VERSION 3.0)
-project(Template)
+project(FreeType)
 
-set(CMAKE_MODULE_PATH 
-    ${Template_SOURCE_DIR}/CMake
-)
-include(Configure)
-subdirs(CMake)
+
+set(FreeType_INCLUDE ${FreeType_SOURCE_DIR}/Source/include)
+set(FreeType_LIBRARY FreeType)
+
 subdirs(Source)
-subdirs(Test)
