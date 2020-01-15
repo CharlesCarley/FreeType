@@ -1,12 +1,6 @@
-# Template
-This is a template repo (insert  description here)
+# FreeType
 
+Build module for using [freetype](https://www.freetype.org/) to load and convert .ttf font files.
 
-## Building
-Building with CMake
-
-```txt
-mkdir build
-cd build
-cmake ..
-```
+This project is released under the MIT license.
+See also [freetype license](https://www.freetype.org/license.html)
