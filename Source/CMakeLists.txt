@@ -81,3 +81,10 @@ endif()
 include_directories(include)
 add_definitions(-DFT2_BUILD_LIBRARY)
 add_library(${TargetName} ${FREETYPE_SRC} ${FREETYPE_PLATFORM})
+
+
+
+
+if (FreeType_TargetFolders)
+    set_target_properties(${TargetName} PROPERTIES FOLDER "${FreeType_TargetGroup}")
+endif()
