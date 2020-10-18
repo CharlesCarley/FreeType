@@ -19,7 +19,16 @@
 #    misrepresented as being the original software.
 # 3. This notice may not be removed or altered from any source distribution.
 # ------------------------------------------------------------------------------
-set(TargetName ${FreeType_LIBRARY})
+if (FreeType_ExternalTarget)
+    set(TargetFolders ${FreeType_TargetFolders})
+    set(TargetName    ${FreeType_TargetName})
+    set(TargetGroup   ${FreeType_TargetGroup})
+else()
+    set(TargetFolders FALSE)
+    set(TargetName    FreeType)
+    unset(TargetGroup )
+endif()
+
 
 if (CMAKE_COMPILER_IS_GNUCXX)
 	add_definitions(-w)
@@ -82,9 +91,6 @@ include_directories(include)
 add_definitions(-DFT2_BUILD_LIBRARY)
 add_library(${TargetName} ${FREETYPE_SRC} ${FREETYPE_PLATFORM})
 
-
-
-
-if (FreeType_TargetFolders)
-    set_target_properties(${TargetName} PROPERTIES FOLDER "${FreeType_TargetGroup}")
+if (TargetFolders)
+    set_target_properties(${TargetName} PROPERTIES FOLDER "${TargetGroup}")
 endif()
