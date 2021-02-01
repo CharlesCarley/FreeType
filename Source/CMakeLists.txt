@@ -25,52 +25,52 @@ else()
     set(TargetName    FreeType)
     unset(TargetGroup )
 endif()
-
+set(FT_VER 2.10.4)
 
 set(FREETYPE_SRC 
-  2.10.4/src/autofit/autofit.c
-  2.10.4/src/base/ftbase.c
-  2.10.4/src/base/ftbbox.c
-  2.10.4/src/base/ftbdf.c
-  2.10.4/src/base/ftbitmap.c
-  2.10.4/src/base/ftcid.c
-  2.10.4/src/base/ftfstype.c
-  2.10.4/src/base/ftgasp.c
-  2.10.4/src/base/ftglyph.c
-  2.10.4/src/base/ftgxval.c
-  2.10.4/src/base/ftinit.c
-  2.10.4/src/base/ftmm.c
-  2.10.4/src/base/ftotval.c
-  2.10.4/src/base/ftpatent.c
-  2.10.4/src/base/ftpfr.c
-  2.10.4/src/base/ftstroke.c
-  2.10.4/src/base/ftsynth.c
-  2.10.4/src/base/fttype1.c
-  2.10.4/src/base/ftwinfnt.c
-  2.10.4/src/bdf/bdf.c
-  2.10.4/src/bzip2/ftbzip2.c
-  2.10.4/src/cache/ftcache.c
-  2.10.4/src/cff/cff.c
-  2.10.4/src/cid/type1cid.c
-  2.10.4/src/gzip/ftgzip.c
-  2.10.4/src/lzw/ftlzw.c
-  2.10.4/src/pcf/pcf.c
-  2.10.4/src/pfr/pfr.c
-  2.10.4/src/psaux/psaux.c
-  2.10.4/src/pshinter/pshinter.c
-  2.10.4/src/psnames/psnames.c
-  2.10.4/src/raster/raster.c
-  2.10.4/src/sfnt/sfnt.c
-  2.10.4/src/smooth/smooth.c
-  2.10.4/src/truetype/truetype.c
-  2.10.4/src/type1/type1.c
-  2.10.4/src/type42/type42.c
-  2.10.4/src/winfonts/winfnt.c
+  ${FT_VER}/src/autofit/autofit.c
+  ${FT_VER}/src/base/ftbase.c
+  ${FT_VER}/src/base/ftbbox.c
+  ${FT_VER}/src/base/ftbdf.c
+  ${FT_VER}/src/base/ftbitmap.c
+  ${FT_VER}/src/base/ftcid.c
+  ${FT_VER}/src/base/ftfstype.c
+  ${FT_VER}/src/base/ftgasp.c
+  ${FT_VER}/src/base/ftglyph.c
+  ${FT_VER}/src/base/ftgxval.c
+  ${FT_VER}/src/base/ftinit.c
+  ${FT_VER}/src/base/ftmm.c
+  ${FT_VER}/src/base/ftotval.c
+  ${FT_VER}/src/base/ftpatent.c
+  ${FT_VER}/src/base/ftpfr.c
+  ${FT_VER}/src/base/ftstroke.c
+  ${FT_VER}/src/base/ftsynth.c
+  ${FT_VER}/src/base/fttype1.c
+  ${FT_VER}/src/base/ftwinfnt.c
+  ${FT_VER}/src/bdf/bdf.c
+  ${FT_VER}/src/bzip2/ftbzip2.c
+  ${FT_VER}/src/cache/ftcache.c
+  ${FT_VER}/src/cff/cff.c
+  ${FT_VER}/src/cid/type1cid.c
+  ${FT_VER}/src/gzip/ftgzip.c
+  ${FT_VER}/src/lzw/ftlzw.c
+  ${FT_VER}/src/pcf/pcf.c
+  ${FT_VER}/src/pfr/pfr.c
+  ${FT_VER}/src/psaux/psaux.c
+  ${FT_VER}/src/pshinter/pshinter.c
+  ${FT_VER}/src/psnames/psnames.c
+  ${FT_VER}/src/raster/raster.c
+  ${FT_VER}/src/sfnt/sfnt.c
+  ${FT_VER}/src/smooth/smooth.c
+  ${FT_VER}/src/truetype/truetype.c
+  ${FT_VER}/src/type1/type1.c
+  ${FT_VER}/src/type42/type42.c
+  ${FT_VER}/src/winfonts/winfnt.c
 )
 
 if (WIN32)
 	set(FREETYPE_PLATFORM
-		2.10.4/src/base/ftdebug.c
+		${FT_VER}/src/base/ftdebug.c
 		)
 	add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE -D_CRT_NONSTDC_NO_DEPRECATE)
 endif (WIN32)
@@ -80,9 +80,12 @@ if (APPLE)
 endif()
 
 
-include_directories(2.10.4/include)
+include_directories(${FT_VER}/include)
 add_definitions(-DFT2_BUILD_LIBRARY)
-add_library(${TargetName} ${FREETYPE_SRC} ${FREETYPE_PLATFORM})
+
+add_library(${TargetName} 
+    ${FREETYPE_SRC} 
+    ${FREETYPE_PLATFORM})
 
 if (TargetFolders)
     set_target_properties(${TargetName} PROPERTIES FOLDER "${TargetGroup}")
