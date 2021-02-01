@@ -66,14 +66,17 @@ set(FREETYPE_SRC
   ${FT_VER}/src/type1/type1.c
   ${FT_VER}/src/type42/type42.c
   ${FT_VER}/src/winfonts/winfnt.c
+  ${FT_VER}/src/base/ftsystem.c
 )
 
 if (WIN32)
-	set(FREETYPE_PLATFORM
-		${FT_VER}/src/base/ftdebug.c
-		)
-	add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE -D_CRT_NONSTDC_NO_DEPRECATE)
-endif (WIN32)
+	add_definitions(-D_CRT_SECURE_NO_WARNINGS 
+                    -D_CRT_SECURE_NO_DEPRECATE 
+                    -D_CRT_NONSTDC_NO_DEPRECATE)
+    list(APPEND FREETYPE_SRC ${FT_VER}/builds/windows/ftdebug.c)
+else()
+    list(APPEND FREETYPE_SRC ${FT_VER}/src/base/ftdebug.c)
+endif()
 
 if (APPLE)
 	add_definitions(-DDARWIN_NO_CARBON)
@@ -83,9 +86,10 @@ endif()
 include_directories(${FT_VER}/include)
 add_definitions(-DFT2_BUILD_LIBRARY)
 
-add_library(${TargetName} 
+add_library(
+    ${TargetName} 
     ${FREETYPE_SRC} 
-    ${FREETYPE_PLATFORM})
+    )
 
 if (TargetFolders)
     set_target_properties(${TargetName} PROPERTIES FOLDER "${TargetGroup}")
